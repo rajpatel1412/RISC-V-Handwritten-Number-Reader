@@ -15,25 +15,50 @@
 dot:
 
     # Prologue
+    addi sp, sp, -36
+    sw ra, 32(sp)
+    sw s0, 28(sp)
+    addi s0, sp, 36
+    sw a0, 24(sp) # pointer to v0
+    sw a1, 20(sp) # pointer to v1
+    sw a2, 16(sp) # size
+    sw a3, 12(sp) # stride v0
+    sw a4, 8(sp) # stride v1
+    sw zero, 4(sp) # initial sum t0
+    sw zero 0(sp) # index t1
 
 
 loop_start:
 
-
-
-
-
-
-
-
-
-
+    lw t0, 4(sp) # sum
+    lw t1, 0(sp) # index
+    lw a2, 16(sp)
+    bge t1, a2, loop_end
+    lw a0, 24(sp)
+    lw a1 20(sp)
+    lw a3, 12(sp)
+    lw a4, 8(sp)
+    mul t2, t1, a3
+    slli t2, t2, 2 
+    add t2, t2, a0 # address of element in v0
+    mul t3, t1, a4
+    slli t3, t3, 2 
+    add t3, t3, a1 # address of element in v1
+    lw t4, 0(t2) # dereference of element in v0
+    lw t5, 0(t3) # dereference of element in v1
+    mul t6, t4, t5
+    add t0, t0, t6
+    sw t0, 4(sp)
+    addi t1, t1, 1
+    sw t1, 0(sp)
+    j loop_start
 
 
 loop_end:
-
-
     # Epilogue
-
+    lw a0, 4(sp)
+    lw s0, 28(sp)
+    lw ra, 32(sp)
+    addi sp, sp, 36
     
     ret
