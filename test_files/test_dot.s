@@ -5,7 +5,10 @@
 .data
 vector0: .word 1 2 3 4 5 6 7 8 9
 vector1: .word 1 2 3 4 5 6 7 8 9
-
+#vector0: .word 1 0 2 0 3 
+#vector1: .word 1 3 5 
+#vector0: .word 1 2 3 4 5 6
+#vector1: .word 1 2 3 4 5 6 
 
 .text
 # main function for testing
@@ -18,6 +21,12 @@ main:
     addi s2, zero, 9
     addi s3, zero, 1
     mv s4, s3
+    # addi s2, zero, 3
+    # addi s3, zero, 2
+    # addi s4, zero, 1
+    #addi s2, zero, 2
+    #addi s3, zero, 1
+    #addi s4, zero, 3
 
 
     # Call dot function
