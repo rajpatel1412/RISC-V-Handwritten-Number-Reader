@@ -104,7 +104,7 @@ main:
 
     addi sp, sp, -8
     sw s2, 4(sp) # argc
-    sw s3, 0(sp) # argv
+        sw s3, 0(sp) # argv
 
     # =====================================
     # RUN LAYERS
